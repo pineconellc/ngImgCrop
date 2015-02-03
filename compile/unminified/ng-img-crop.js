@@ -5,7 +5,7 @@
  * Copyright (c) 2015 Alex Kaul
  * License: MIT
  *
- * Generated at Wednesday, January 28th, 2015, 1:04:44 PM
+ * Generated at Tuesday, February 3rd, 2015, 2:45:33 PM
  */
 (function() {
 'use strict';
@@ -1721,7 +1721,7 @@ crop.factory('cropHost', ['$document', '$window', 'cropAreaCircle', 'cropAreaSqu
             var orientation=cropEXIF.getTag(newImage,'Orientation');
 
             if([3,6,8].indexOf(orientation)>-1) {
-              var canvas = $document.createElement('canvas'),
+              var canvas = $document[0].createElement('canvas'),
                   ctx=canvas.getContext('2d'),
                   cw = newImage.width, ch = newImage.height, cx = 0, cy = 0, deg=0;
               switch(orientation) {
