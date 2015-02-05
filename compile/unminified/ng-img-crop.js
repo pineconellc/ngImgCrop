@@ -5,7 +5,7 @@
  * Copyright (c) 2015 Alex Kaul
  * License: MIT
  *
- * Generated at Tuesday, February 3rd, 2015, 2:45:33 PM
+ * Generated at Wednesday, February 4th, 2015, 9:06:19 PM
  */
 (function() {
 'use strict';
@@ -1549,6 +1549,11 @@ crop.factory('cropHost', ['$document', '$window', 'cropAreaCircle', 'cropAreaSqu
         theArea.draw();
       }
     }
+    
+    function updateImage(cropData) {
+      resetCropHost(cropData);
+      events.trigger('image-updated');
+    }
 
     // Resets CropHost
     var resetCropHost=function(cropData) {
@@ -1707,8 +1712,7 @@ crop.factory('cropHost', ['$document', '$window', 'cropAreaCircle', 'cropAreaSqu
 
     this.setNewImageSource=function(imageSource, cropData) {
       image=null;
-      resetCropHost();
-      events.trigger('image-updated');
+      updateImage();
       if(!!imageSource) {
         var newImage = new Image();
         if(imageSource.substring(0,4).toLowerCase()==='http') {
@@ -1750,12 +1754,14 @@ crop.factory('cropHost', ['$document', '$window', 'cropAreaCircle', 'cropAreaSqu
               ctx.drawImage(newImage, cx, cy);
 
               image=new Image();
+              image.onload = function() {
+                updateImage(cropData);
+              };
               image.src = canvas.toDataURL('image/png');
             } else {
               image=newImage;
+              updateImage(cropData);
             }
-            resetCropHost(cropData);
-            events.trigger('image-updated');
           });
         };
         newImage.onerror=function() {
