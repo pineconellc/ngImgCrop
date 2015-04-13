@@ -56,10 +56,11 @@ crop.factory('cropCanvas', [function() {
     /* Icons */
 
     this.drawIconMove=function(centerCoords, scale) {
-      drawFilledPolygon(shapeArrowN, colors.moveIconFill, centerCoords, scale);
-      drawFilledPolygon(shapeArrowW, colors.moveIconFill, centerCoords, scale);
-      drawFilledPolygon(shapeArrowS, colors.moveIconFill, centerCoords, scale);
-      drawFilledPolygon(shapeArrowE, colors.moveIconFill, centerCoords, scale);
+      // Disabled
+      // drawFilledPolygon(shapeArrowN, colors.moveIconFill, centerCoords, scale);
+      // drawFilledPolygon(shapeArrowW, colors.moveIconFill, centerCoords, scale);
+      // drawFilledPolygon(shapeArrowS, colors.moveIconFill, centerCoords, scale);
+      // drawFilledPolygon(shapeArrowE, colors.moveIconFill, centerCoords, scale);
     };
 
     this.drawIconResizeCircle=function(centerCoords, circleRadius, scale) {

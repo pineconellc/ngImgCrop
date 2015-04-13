@@ -5,7 +5,7 @@
  * Copyright (c) 2015 Alex Kaul
  * License: MIT
  *
- * Generated at Monday, April 13th, 2015, 3:13:22 PM
+ * Generated at Monday, April 13th, 2015, 5:54:22 PM
  */
 (function() {
 'use strict';
@@ -618,10 +618,11 @@ crop.factory('cropCanvas', [function() {
     /* Icons */
 
     this.drawIconMove=function(centerCoords, scale) {
-      drawFilledPolygon(shapeArrowN, colors.moveIconFill, centerCoords, scale);
-      drawFilledPolygon(shapeArrowW, colors.moveIconFill, centerCoords, scale);
-      drawFilledPolygon(shapeArrowS, colors.moveIconFill, centerCoords, scale);
-      drawFilledPolygon(shapeArrowE, colors.moveIconFill, centerCoords, scale);
+      // Disabled
+      // drawFilledPolygon(shapeArrowN, colors.moveIconFill, centerCoords, scale);
+      // drawFilledPolygon(shapeArrowW, colors.moveIconFill, centerCoords, scale);
+      // drawFilledPolygon(shapeArrowS, colors.moveIconFill, centerCoords, scale);
+      // drawFilledPolygon(shapeArrowE, colors.moveIconFill, centerCoords, scale);
     };
 
     this.drawIconResizeCircle=function(centerCoords, circleRadius, scale) {
