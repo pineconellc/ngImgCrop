@@ -5,7 +5,7 @@
  * Copyright (c) 2015 Alex Kaul
  * License: MIT
  *
- * Generated at Wednesday, February 4th, 2015, 9:06:19 PM
+ * Generated at Monday, April 13th, 2015, 3:13:22 PM
  */
 (function() {
 'use strict';
@@ -574,13 +574,14 @@ crop.factory('cropCanvas', [function() {
   var shapeArrowE=[[2.5,-1.5],[6,-1.5],[6,-5],[11,0],[6,5],[6,1.5],[2.5,1.5]];
 
   // Colors
-  var colors={
-    areaOutline: '#fff',
-    resizeBoxStroke: '#fff',
-    resizeBoxFill: '#444',
+  var primaryColor = '#3eb5be';
+  var colors = {
+    areaOutline: primaryColor,
+    resizeBoxStroke: primaryColor,
+    resizeBoxFill: '#fff',
     resizeBoxArrowFill: '#fff',
-    resizeCircleStroke: '#fff',
-    resizeCircleFill: '#444',
+    resizeCircleStroke: primaryColor,
+    resizeCircleFill: '#fff',
     moveIconFill: '#fff'
   };
 
@@ -627,7 +628,7 @@ crop.factory('cropCanvas', [function() {
       var scaledCircleRadius=circleRadius*scale;
       ctx.save();
       ctx.strokeStyle = colors.resizeCircleStroke;
-      ctx.lineWidth = 2;
+      ctx.lineWidth = 5;
       ctx.fillStyle = colors.resizeCircleFill;
       ctx.beginPath();
       ctx.arc(centerCoords[0],centerCoords[1],scaledCircleRadius,0,2*Math.PI);
@@ -669,7 +670,7 @@ crop.factory('cropCanvas', [function() {
       // console.log(image.width+' x '+image.height+' vs '+ctx.canvas.width+' x '+ctx.canvas.height);
       ctx.save();
       ctx.strokeStyle = colors.areaOutline;
-      ctx.lineWidth = 2;
+      ctx.lineWidth = 4;
       ctx.beginPath();
       fnDrawClipPath(ctx, centerCoords, width, height);
       ctx.stroke();
@@ -694,6 +695,7 @@ crop.factory('cropCanvas', [function() {
 
   };
 }]);
+
 
 /**
  * EXIF service is based on the exif-js library (https://github.com/jseidelin/exif-js)
