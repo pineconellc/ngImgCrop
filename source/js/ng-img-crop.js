@@ -66,7 +66,7 @@ crop.directive('imgCrop', ['$timeout', 'cropHost', 'cropPubSub', function($timeo
               height: imgHeight
             };
           }
-          
+
           var resultImage=cropHost.getResultImageDataURI();
           if(storedResultImage!==resultImage) {
             storedResultImage=resultImage;

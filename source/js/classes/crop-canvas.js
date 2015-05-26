@@ -23,7 +23,7 @@ crop.factory('cropCanvas', [function() {
     moveIconFill: '#fff'
   };
 
-  return function(ctx){
+  return function(ctx) {
 
     /* Base functions */
 

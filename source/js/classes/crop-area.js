@@ -51,9 +51,9 @@ crop.factory('cropArea', ['cropCanvas', function(CropCanvas) {
     // scale is the ratio of image to canvas size
     var scale = this.getScale();
     var minSizeScale = Math.round(scale*this._minSize);
-    
+
     this._width = Math.max(minSizeScale, this._unscaledMinSize, size);
-    this._height = Math.floor(this._aspect[1] * this._width / this._aspect[0]);    
+    this._height = Math.floor(this._aspect[1] * this._width / this._aspect[0]);
     this._dontDragOutside();
   };
   CropArea.prototype.getWidth = function () {
@@ -109,8 +109,8 @@ crop.factory('cropArea', ['cropCanvas', function(CropCanvas) {
   CropArea.prototype._dontDragOutside=function() {
     var h=this._ctx.canvas.height,
         w=this._ctx.canvas.width;
-    if(this._width>w) { 
-      this._width=w; 
+    if(this._width>w) {
+      this._width=w;
     }
     if(this._height>h) { this._height=h; }
     if(this._x<this._width/2) { this._x=this._width/2; }

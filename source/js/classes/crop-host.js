@@ -1,6 +1,6 @@
 'use strict';
 
-crop.factory('cropHost', ['$document', '$window', 'cropAreaCircle', 'cropAreaSquare', 'cropEXIF', function($document, $window, CropAreaCircle, CropAreaSquare, cropEXIF) {
+crop.factory('cropHost', ['$document', '$window', 'cropAreaCircle', 'cropAreaSquare', 'cropEXIF', 'cropScaleCanvas', function($document, $window, CropAreaCircle, CropAreaSquare, cropEXIF, cropScaleCanvas) {
   /* STATIC FUNCTIONS */
 
   // Get Element's Offset
@@ -73,7 +73,7 @@ crop.factory('cropHost', ['$document', '$window', 'cropAreaCircle', 'cropAreaSqu
         theArea.draw();
       }
     }
-    
+
     function updateImage(cropData) {
       resetCropHost(cropData);
       events.trigger('image-updated');
@@ -105,7 +105,16 @@ crop.factory('cropHost', ['$document', '$window', 'cropAreaCircle', 'cropAreaSqu
           canvasDims[1]=minCanvasDims[1];
           canvasDims[0]=canvasDims[1]*imageRatio;
         }
-        elCanvas.prop('width',canvasDims[0]).prop('height',canvasDims[1]).css({'margin-left': -canvasDims[0]/2+'px', 'margin-top': -canvasDims[1]/2+'px'});
+
+        elCanvas.prop('width',canvasDims[0]).prop('height',canvasDims[1]);
+
+        cropScaleCanvas(ctx.canvas);
+
+        elCanvas.css({
+          'margin-left': -canvasDims[0]/2+'px',
+          'margin-top': -canvasDims[1]/2+'px',
+          width: canvasDims[0]+'px',
+          height: canvasDims[1]+'px'});
 
         setX = ctx.canvas.width/2;
         setY = ctx.canvas.height/2;
@@ -135,7 +144,6 @@ crop.factory('cropHost', ['$document', '$window', 'cropAreaCircle', 'cropAreaSqu
         theArea.setX(setX);
         theArea.setY(setY);
         theArea.setSize(setSize);
-        
 
         // Set cropping selection to 200, half canvas width, or half canvas height (whichever is smallest)
         // theArea.setSize(Math.min(200, ctx.canvas.width/2, ctx.canvas.height/2));

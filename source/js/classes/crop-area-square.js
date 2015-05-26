@@ -139,7 +139,7 @@ crop.factory('cropAreaSquare', ['cropArea', function(CropArea) {
       var scale = this.getScale();
       // rounds up the minimum crop to keep from collapsing crop area below minimum
       var minSizeScale = Math.ceil(scale*this._minSize);
-      
+
       var newWidth= Math.max(minSizeScale, this._unscaledMinSize, iFW);
       var newHeight= Math.floor(this._aspect[1] * newWidth / this._aspect[0]);
       if(newWidth <= canvas_w && newHeight <= canvas_h){
