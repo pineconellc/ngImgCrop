@@ -46,14 +46,14 @@
     <div>
       <label><input type="checkbox" ng-model="changeOnFly" /> Change On Fly</label>
     </div>
-    
+
     <div>
-      Aspect Ratio: 
+      Aspect Ratio:
       <label><input type="radio" ng-model="aspectRatio" value="1x1" /> 1 x 1</label>
       <label><input type="radio" ng-model="aspectRatio" value="3x4" /> 3 x 4</label>
       <label><input type="radio" ng-model="aspectRatio" value="6x2" /> 6 x 2</label>
     </div>
-    
+
     <div>
       <label>Area Min Size (Size = Width = Height): <input type="text" ng-model="selMinSize" /></label>
     </div>
@@ -130,16 +130,16 @@
   <script type="text/javascript">
     angular.module('app', ['ngImgCrop'])
       .controller('Ctrl', function($scope) {
-        $scope.size='small';
-        $scope.type='circle';
-        $scope.aspectRatio='1x1';
+        $scope.size='big';
+        $scope.type='square';
+        $scope.aspectRatio='16x9';
         $scope.image = {
           originalInfo: {},
           cropInfo: {}
         };
-        $scope.imageDataURI='';
+        $scope.imageDataURI='test.jpg';
         $scope.resImageDataURI='';
-        $scope.resImgFormat='image/png';
+        $scope.resImgFormat='image/jpeg';
         $scope.resImgQuality=1;
         $scope.selMinSize=100;
         $scope.resImgSize=200;
