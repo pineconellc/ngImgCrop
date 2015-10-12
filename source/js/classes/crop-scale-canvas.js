@@ -11,17 +11,13 @@ crop.factory('cropScaleCanvas', ['$window', function($window) {
                             ctx.backingStorePixelRatio || 1,
                             densityRatio = devicePixelRatio / backingStoreRatio;
 
+
     if (densityRatio > 1) {
       var oldWidth = canvas.width,
           oldHeight = canvas.height;
-
+      ctx.scale(densityRatio, densityRatio);
       canvas.width = oldWidth * densityRatio;
       canvas.height = oldHeight * densityRatio;
-
-      // canvas.style.width = oldWidth + 'px';
-      // canvas.style.height = oldWidth + 'px';
-
-      ctx.scale(densityRatio, densityRatio);
     }
   }
 }]);

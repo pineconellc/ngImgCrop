@@ -55,17 +55,18 @@ crop.factory('cropHost', ['$document', '$window', 'cropAreaCircle', 'cropAreaSqu
     // Draw Scene
     function drawScene() {
       // clear canvas
-      ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
+      var canvasRect = ctx.canvas.getBoundingClientRect();
+      ctx.clearRect(0, 0, canvasRect.width, canvasRect.height);
 
       if(image!==null) {
         // draw source image
-        ctx.drawImage(image, 0, 0, ctx.canvas.width, ctx.canvas.height);
+        ctx.drawImage(image, 0, 0, canvasRect.width, canvasRect.height);
 
         ctx.save();
 
         // and make it darker
         ctx.fillStyle = 'rgba(0, 0, 0, 0.65)';
-        ctx.fillRect(0, 0, ctx.canvas.width, ctx.canvas.height);
+        ctx.fillRect(0, 0, canvasRect.width, canvasRect.height);
 
         ctx.restore();
 
@@ -86,6 +87,7 @@ crop.factory('cropHost', ['$document', '$window', 'cropAreaCircle', 'cropAreaSqu
         var imageDims=[image.width, image.height],
             imageRatio=image.width/image.height,
             canvasDims=imageDims,
+            canvasElDims,
             setX,
             setY,
             setSize,
@@ -116,30 +118,32 @@ crop.factory('cropHost', ['$document', '$window', 'cropAreaCircle', 'cropAreaSqu
           width: canvasDims[0]+'px',
           height: canvasDims[1]+'px'});
 
-        setX = ctx.canvas.width/2;
-        setY = ctx.canvas.height/2;
+        canvasElRect = ctx.canvas.getBoundingClientRect();
+        setX = canvasElRect.width / 2;
+        setY = canvasElRect.height / 2;
+
         // Set maximum cropping selection based on width
-        setSize = ctx.canvas.width-1;
+        setSize = setX-1;
         setHeight = Math.floor(resImgAspect[1] * setSize / resImgAspect[0]);
         if(typeof cropData !== 'undefined' && typeof cropData.width !== 'undefined' && cropData.width > 0){
-          var cur_ratio = ctx.canvas.width/image.width;
+          var cur_ratio = canvasElRect.width/image.width;
           setSize = Math.round(cropData.width*cur_ratio);
           // Keep size in-bounds
-          if(setSize > ctx.canvas.width) { setSize = ctx.canvas.width-1; }
+          if(setSize > canvasElRect.width) { setSize = canvasElRect.width-1; }
           setHeight = Math.floor(resImgAspect[1] * setSize / resImgAspect[0]);
           // Passed cropData coordinates set to top left corner, adjusted in libarary at center point...
           setX = Math.round((cropData.x*cur_ratio)+(setSize/2));
           setY = Math.round((cropData.y*cur_ratio)+(setHeight/2));
         }
         // if width causes height to extend boundry
-        if(setHeight > ctx.canvas.height){
+        if(setHeight > canvasElRect.height){
           // Set maximum cropping selection based on height
-          setHeight = ctx.canvas.height-1;
+          setHeight = canvasElRect.height-1;
           setSize = Math.floor(resImgAspect[0] * setHeight / resImgAspect[1]);
         }
         // Keep coordinates in-bounds
-        if(setX + (setSize/2) > ctx.canvas.width) { setX = Math.floor(ctx.canvas.width - (setSize/2)); }
-        if(setY + (setHeight/2) > ctx.canvas.height) { setY = Math.floor(ctx.canvas.height - (setHeight/2)); }
+        if(setX + (setSize/2) > canvasElRect.width) { setX = Math.floor(canvasElRect.width - (setSize/2)); }
+        if(setY + (setHeight/2) > canvasElRect.height) { setY = Math.floor(canvasElRect.height - (setHeight/2)); }
 
         theArea.setX(setX);
         theArea.setY(setY);
