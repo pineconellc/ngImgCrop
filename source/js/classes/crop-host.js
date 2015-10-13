@@ -55,18 +55,21 @@ crop.factory('cropHost', ['$document', '$window', 'cropAreaCircle', 'cropAreaSqu
     // Draw Scene
     function drawScene() {
       // clear canvas
-      var canvasRect = ctx.canvas.getBoundingClientRect();
-      ctx.clearRect(0, 0, canvasRect.width, canvasRect.height);
+      ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
 
       if(image!==null) {
         // draw source image
-        ctx.drawImage(image, 0, 0, canvasRect.width, canvasRect.height);
+        var imageWidth = ctx.canvas.width,
+            imageHeight = ctx.canvas.height;
+
+
+        ctx.drawImage(image, 0, 0, imageWidth, imageHeight);
 
         ctx.save();
 
         // and make it darker
         ctx.fillStyle = 'rgba(0, 0, 0, 0.65)';
-        ctx.fillRect(0, 0, canvasRect.width, canvasRect.height);
+        ctx.fillRect(0, 0, imageWidth, imageHeight);
 
         ctx.restore();
 

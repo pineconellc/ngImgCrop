@@ -101,8 +101,9 @@ crop.factory('cropCanvas', [function() {
     /* Crop Area */
 
     this.drawCropArea=function(image, centerCoords, width, height, fnDrawClipPath) {
-      var xRatio=image.width/ctx.canvas.width,
-          yRatio=image.height/ctx.canvas.height,
+      var canvasRect=ctx.canvas.getBoundingClientRect(),
+          xRatio=image.width/canvasRect.width,
+          yRatio=image.height/canvasRect.height,
           xLeft=centerCoords[0]-width/2,
           yTop=centerCoords[1]-height/2;
 

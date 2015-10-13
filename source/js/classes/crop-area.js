@@ -85,6 +85,18 @@ crop.factory('cropArea', ['cropCanvas', function(CropCanvas) {
     this._dontDragOutside();
   };
 
+  CropArea.prototype.getCanvasRect = function () {
+    return this._ctx.canvas.getBoundingClientRect()
+  }
+
+  CropArea.prototype.getCanvasWidth = function () {
+    return this.getCanvasRect().width;
+  }
+
+  CropArea.prototype.getCanvasHeight = function () {
+    return this.getCanvasRect().height;
+  }
+
   CropArea.prototype.getAspect = function () {
     return this._aspect;
   };
@@ -92,9 +104,10 @@ crop.factory('cropArea', ['cropCanvas', function(CropCanvas) {
     this._aspect = [w,h];
     this._dontDragOutside();
   };
+
   CropArea.prototype.getScale = function () {
-    var xScale = this._ctx.canvas.width/this._image.width;
-    var yScale = this._ctx.canvas.height/this._image.height;
+    var xScale = this.getCanvasWidth()/this._image.width;
+    var yScale = this.getCanvasHeight()/this._image.height;
 
     // only return real float values
     if(isNaN(xScale) || isNaN(yScale) || !isFinite(xScale) || !isFinite(yScale)){
@@ -107,8 +120,8 @@ crop.factory('cropArea', ['cropCanvas', function(CropCanvas) {
 
   /* FUNCTIONS */
   CropArea.prototype._dontDragOutside=function() {
-    var h=this._ctx.canvas.height,
-        w=this._ctx.canvas.width;
+    var h=this.getCanvasHeight(),
+        w=this.getCanvasWidth();
     if(this._width>w) {
       this._width=w;
     }
