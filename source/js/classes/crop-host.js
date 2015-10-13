@@ -113,7 +113,7 @@ crop.factory('cropHost', ['$document', '$window', 'cropAreaCircle', 'cropAreaSqu
 
         elCanvas.prop('width',canvasDims[0]).prop('height',canvasDims[1]);
 
-        cropScaleCanvas(ctx.canvas);
+        cropScaleCanvas.resetDimensions(elCanvas[0]);
 
         elCanvas.css({
           'margin-left': -canvasDims[0]/2+'px',
@@ -444,6 +444,7 @@ crop.factory('cropHost', ['$document', '$window', 'cropAreaCircle', 'cropAreaSqu
 
     // Init Context var
     ctx = elCanvas[0].getContext('2d');
+    cropScaleCanvas.resetScale(ctx);
 
     // Init CropArea
     theArea = new CropAreaCircle(ctx, events);
